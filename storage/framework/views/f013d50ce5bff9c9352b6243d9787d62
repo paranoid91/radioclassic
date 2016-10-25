@@ -1,0 +1,20 @@
+<?php /*
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<div class="content" id="content" <?php if(Route::getCurrentRoute()->uri() == '/'): ?>style="background:#FFFFFF;margin:30% auto 0 auto !important;padding:20px !important;"<?php endif; ?>>
+    <?php echo $__env->yieldContent('content'); ?>
+</div>
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+*/ ?>
+
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<div class="content" id="content" style="background:#FFFFFF;margin:500px auto 0 auto !important;padding:20px !important;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-container-wrapper col-sm-9 col-md-9 col-lg-9">
+                <?php echo $__env->yieldContent('content'); ?>
+            </div>
+            <?php echo $__env->make('theme.pages.ad', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        </div>
+    </div>
+</div>
+<?php echo $__env->make('footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

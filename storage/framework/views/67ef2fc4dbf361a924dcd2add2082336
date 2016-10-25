@@ -1,0 +1,71 @@
+<?php $playlist = radioPlaylist();?>
+<?php $img = array(); $i=0;?>
+<div class="radio-playlist">
+    <div class="radio-playlist-filter">
+        <form method="post" action="" onSubmit="getAjaxPlaylist(this);return false">
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"/>
+            <input type="hidden" name="action" value="<?php echo e(action('WelcomeController@searchPlaylist')); ?>"/>
+        <label for="date1">Päivämäärä</label><br>
+        <input type="text" id="date1" name="date" class="input_date" value="<?php echo e(date('d-m-Y')); ?>"/><br>
+        <small>Valitse kalenterista haluamasi päivämäärä, esimerkiksi <?php echo e(date('d.m.Y')); ?></small>
+        <br><br>
+        <input type="submit" name="search" value="ETSI" style="width:15%"> <input type="submit" style="width:25%" name="reset" onClick="$('#date1').val('')" value="Näytä äsken soineet">
+        </form>
+    </div>
+    <div id="music-list">
+    <?php if(count($playlist) > 0): ?>
+        <?php foreach($playlist as $play): ?>
+           <?php $data = unserialize($play->data); ?>
+        <div class="radio-playlist-item">
+            <ul>
+                <li>
+                    <?php if(count($data) > 0): ?>
+                    <div class="playlist-item-img">
+                        <?php if(!empty($play->img)): ?>
+                            <img src="<?php echo e($play->img); ?>" width="130"/>
+                        <?php else: ?>
+                            <?php $image = asset('theme/images/no_photo.png');?>
+                            <img src="<?php echo e($image); ?>" width="130"/>
+                        <?php endif; ?>
+                        <?php if($play->download != 'null' && $play->download != ''): ?>
+                            <br> <br>
+                            <a href="<?php echo e($play->download); ?>" target="_blank"><img width="100px" src="<?php echo e(asset('theme/images/download-on-itunes.png')); ?>"></a>
+                        <?php endif; ?>
+                    </div>
+                    <div class="playlist-item-info">
+                        <b><?php echo e(date('d.m.Y H:i',strtotime($play->timestamp))); ?></b><br>
+                      <b><?php echo e(validate_extra_field($data,'composer')); ?></b>: <span><?php echo e(validate_extra_field($data,'title')); ?></span><br>
+                      <span><?php echo e(validate_extra_field($data,'local_name')); ?></span><br>
+                        <?php if(validate_extra_field($data,'maestro')): ?>
+                            Kapellimestari: <span><?php echo e(validate_extra_field($data,'maestro')); ?></span><br>
+                        <?php endif; ?>
+                        <?php if(validate_extra_field($data,'performer')): ?>
+                            Esittäjä: <span><?php echo e(validate_extra_field($data,'performer')); ?></span><br>
+                        <?php endif; ?>
+                        <?php if(validate_extra_field($data,'soloist')): ?>
+                            Solisti: <span><?php echo e(validate_extra_field($data,'soloist')); ?></span><br>
+                        <?php endif; ?>
+                        <?php if(validate_extra_field($data,'label')): ?>
+                            Levy-yhtiö: <span><?php echo e(validate_extra_field($data,'label')); ?></span><br>
+                        <?php endif; ?>
+                        <?php if(validate_extra_field($data,'album')): ?>
+                            Levy: <span><?php echo e(validate_extra_field($data,'album')); ?></span><br>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
+                </li>
+            </ul>
+        </div>
+            <?php /**/$i++/**/ ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    </div>
+    <div class="fix"></div>
+</div>
+<script>
+    $(function() {
+        $('#date1').datetimepicker({
+            format: 'DD-MM-YYYY'
+        });
+    });
+</script>

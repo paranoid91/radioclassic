@@ -1,0 +1,66 @@
+@font-face {
+    font-family: 'BPGNinoMtavruli-Bold';
+    src: url('../theme/css/fonts/ninomtavruli/bold/bpgninomtavrulibold.eot');
+    src: url('../theme/css/fonts/ninomtavruli/bold/bpgninomtavrulibold.eot?#iefix') format('embedded-opentype'),
+    url('../theme/css/fonts/ninomtavruli/bold/bpgninomtavrulibold.woff') format('woff'),
+    url('../theme/css/fonts/ninomtavruli/bold/bpgninomtavrulibold.ttf') format('truetype'),
+    url('../theme/css/fonts/ninomtavruli/bold/bpgninomtavrulibold.svg#BPGNinoMtavruli-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BPGNinoMtavruliRegular';
+    src: url('../theme/css/fonts/ninomtavruli/regular/bpg_nino_mtavruli_normal.eot');
+    src: url('../theme/css/fonts/ninomtavruli/regular/bpg_nino_mtavruli_normal.eot') format('embedded-opentype'),
+    url('../theme/css/fonts/ninomtavruli/regular/bpg_nino_mtavruli_normal.woff2') format('woff2'),
+    url('../theme/css/fonts/ninomtavruli/regular/bpg_nino_mtavruli_normal.woff') format('woff'),
+    url('../theme/css/fonts/ninomtavruli/regular/bpg_nino_mtavruli_normal.ttf') format('truetype'),
+    url('../theme/css/fonts/ninomtavruli/regular/bpg_nino_mtavruli_normal.svg#BPGNinoMtavruliRegular') format('svg');
+}
+@font-face {
+    font-family: 'BPGArial';
+    src: url('../theme/css/fonts/other/bpgarial2009.eot');
+    src: url('../theme/css/fonts/other/bpgarial2009.eot?#iefix') format('embedded-opentype'),
+    url('../theme/css/fonts/other/bpgarial2009.woff') format('woff'),
+    url('../theme/css/fonts/other/bpgarial2009.ttf') format('truetype'),
+    url('../theme/css/fonts/other/bpgarial2009.svg#BPGArial') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BPGIngiri2008Regular';
+    src: url('../theme/css/fonts/ingiri2008/bpg_ingiri_2008.eot');
+    src: url('../theme/css/fonts/ingiri2008/bpg_ingiri_2008.eot') format('embedded-opentype'),
+    url('../theme/css/fonts/ingiri2008/bpg_ingiri_2008.woff2') format('woff2'),
+    url('../theme/css/fonts/ingiri2008/bpg_ingiri_2008.woff') format('woff'),
+    url('../theme/css/fonts/ingiri2008/bpg_ingiri_2008.ttf') format('truetype'),
+    url('../theme/css/fonts/ingiri2008/bpg_ingiri_2008.svg#BPGIngiri2008Regular') format('svg');
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../theme/css/fonts/other/BebasNeue-webfont.eot');
+    src: url('../theme/css/fonts/other/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../theme/css/fonts/other/BebasNeue-webfont.woff') format('woff'),
+    url('../theme/css/fonts/other/BebasNeue-webfont.ttf') format('truetype'),
+    url('../theme/css/fonts/other/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'BPGMrgvlovani2010';
+    src: url('../theme/css/fonts/other/BPGMrgvlovani2010.eot?#iefix') format('embedded-opentype'),  url('../theme/css/fonts/other/BPGMrgvlovani2010.woff') format('woff'), url('../theme/css/fonts/other/BPGMrgvlovani2010.ttf')  format('truetype'), url('../theme/css/fonts/other/BPGMrgvlovani2010.svg#BPGMrgvlovani2010') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'BPGNinoMtavruli-Bold';
+    src: url('../theme/css/fonts/other/BPGNinoMtavruli-Bold.eot?#iefix') format('embedded-opentype'),  url('../theme/css/fonts/other/BPGNinoMtavruli-Bold.woff') format('woff'), url('../theme/css/fonts/other/BPGNinoMtavruli-Bold.ttf')  format('truetype'), url('../theme/css/fonts/other/BPGNinoMtavruli-Bold.svg#BPGNinoMtavruli-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,29 @@
+
+
+
+<?php $__env->startSection('content'); ?>
+
+    <h2><?php echo e(trans('articles.create')); ?></h2>
+
+    <?php /**/ $date = date('d/m/Y H:i') /**/ ?>
+    <?php /**/ $finished_at = date('d/m/Y H:i') /**/ ?>
+    <?php echo Form::open(['action'=>'Admin\ArticlesController@store']); ?>
+
+         <?php echo $__env->make('admin.articles.form',[
+         'submitButtonText'=>trans('all.add'),
+         'item'=>false,'checked'=>null,
+         'chose_author'=>$auth,
+         'news_id'=>0,
+         'parent'=>'',
+         'brightcove'=>'',
+         'embed'=>'',
+         'lang'=>App::getLocale(),
+         'type'=>''
+         ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo Form::close(); ?>
+
+   <?php echo $__env->make("admin.preview_script", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('errors.list', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,50 @@
+
+
+<?php $__env->startSection('content'); ?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <?php echo e(trans('all.records')); ?>
+
+        <a href="<?php echo e(action('Admin\ArticlesController@create')); ?>" class="btn btn-success right"><i class="fa fa-plus"></i> <?php echo e(trans('all.add')); ?></a><div class="fix"></div>
+    </div>
+    <div class="container">
+        <h3 style="padding-left: 20px"><a href="<?php echo e(action("Admin\ArticlesController@sortNews")); ?>"><span class="glyphicon glyphicon-list-alt"></span> Sort News</a></h3>
+    </div>
+    <div class="panel-body">
+        <?php echo $__env->make('admin.articles.filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#ID</th><th>NODE</th><th><?php echo e(trans('all.title')); ?></th><th><?php echo e(trans('all.category')); ?></th><th><?php echo e(trans('all.author')); ?></th><th><?php echo e(trans('all.published')); ?></th><th><?php echo e(trans('all.status')); ?></th><th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php foreach($articles as $article): ?>
+            <tr>
+                <td><?php echo e($article->id); ?></td>
+                <td><?php echo e($article->node); ?></td>
+                <td><a href="<?php echo e(action('Admin\ArticlesController@edit',$article->id)); ?>" class="col-lg-11" <?php if($article->status==0): ?>style="color:red;"<?php endif; ?>><?php echo e((trans('all.'.$article->title) != 'all.'.$article->title) ?  trans('all.'.$article->title) : $article->title); ?></a></td>
+                <td><?php /**/ $i=0 /**/ ?> <?php foreach($article->categories as $cat): ?> <?php echo e(trans('all.'.$cat->name)); ?> <?php if($i < (count($article->categories) - 1)): ?> , <?php endif; ?> <?php /**/ $i++ /**/ ?> <?php endforeach; ?></td>
+                <td><?php echo e($article->author); ?></td>
+                <td><?php echo e($article->published_at); ?></td>
+                <td align="center"><a class="article-status" data-route="<?php echo e(action('Admin\ArticlesController@active',$article->id)); ?>" data-token="<?php echo e(csrf_token()); ?>"><?php echo ($article->status > 0) ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>'; ?></a></td>
+                <td>
+                    <a href="<?php echo e(action('Admin\ArticlesController@edit',$article->id)); ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                    <a class="remove-modal" data-toggle="modal" data-target="#RemoveModal" data-url="<?php echo e(action('Admin\ArticlesController@destroy',$article->id)); ?>" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" align="center"><?php echo str_replace('/?', '?', $articles->render()); ?></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<?php echo $__env->make('admin.modals.remove',['item'=>trans('articles.sure')], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,235 @@
+.radio-player{
+  position:fixed;
+  bottom:0;
+  background-color:#f3f3f3;
+  height:65px;
+  width:100%;
+  opacity:1;
+  z-index:999;
+}
+.radio-player .radio-player-space{
+  position:relative;
+  padding:0 40px 0 40px;
+}
+
+.radio-player .radio-player-space > div{
+  display:inline-block;
+}
+
+.player-buttons{
+  position:absolute;
+}
+
+.player-buttons > div{
+  float:left;
+}
+
+.player-buttons .play-pause a.play{
+  background-image:url('../images/play1.png');
+}
+
+.player-buttons .play-pause a.pause{
+  background-image:url('../images/pause.png');
+}
+
+.player-buttons .play-pause a{
+  background-repeat:no-repeat;
+  background-size:29px 33px;
+  background-position:center center;
+  width:38px;
+  height:64px;
+  display:block;
+  cursor:pointer;
+}
+
+.radio-player-playlist{
+  margin-left:300px;
+}
+
+.radio-player-playlist ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+
+.radio-player-playlist ul li div{
+  float:left;
+}
+
+
+
+.radio-player-playlist ul li.frequencies{
+  position:absolute;
+  right:0;
+}
+
+.radio-player-playlist ul li.frequencies .button a:hover{
+  background-color:#a52125;
+  color:#FFF;
+}
+
+.radio-player-playlist ul li .desc h3,.radio-player-playlist ul li .desc h5{
+  font-weight:500;
+}
+
+
+.radio-player-playlist ul li{
+  float:left;
+  position:relative;
+  width:120px;
+  overflow:hidden;
+  height:64px;
+}
+.radio-player-playlist ul li .play-content{
+  width:750px;
+}
+.radio-player-playlist ul li .desc{
+  color:#4f4d4d;
+  padding:15px 5px;
+  border-right:2px solid #a52125;
+  text-align:center;
+  display:block;
+  overflow:hidden;
+  position:relative;
+  top:0;
+  left:0;
+}
+
+
+.radio-player-playlist ul li .button a{
+  text-decoration:none;
+  color:#a52125;
+  height:65px;
+  display:block;
+  cursor:pointer;
+  width:120px;
+  text-align:center;
+}
+
+
+
+.radio-player-playlist ul li.active .button a{
+  text-decoration:none;
+  color:#FFF;
+  background-color:#a52125;
+  height:65px;
+  display:block;
+  cursor:pointer;
+  width:120px;
+}
+
+.radio-player-playlist ul li .button a span{
+   line-height:70px;
+   text-transform:uppercase;
+}
+
+.radio-stations{
+  position:fixed;
+  display:none;
+  background-color:#a52125;
+  right:0;
+  bottom:65px;
+  width:100%;
+  z-index:999;
+  padding:20px;
+}
+
+.radio-stations .stations-content{
+   margin:0 auto;
+   width:1200px;
+}
+
+.radio-stations .block{
+   float:left;
+}
+
+.radio-stations h3{
+  color:#FFF;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.radio-stations ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.radio-stations ul li{
+  color:#FFF;
+  float:left;
+  width:300px;
+  min-height:30px;
+  font-size:15px;
+  text-align:center;
+}
+
+#volume{
+  width:100%;
+  height:2px;
+  display:block;
+  background-color:#c4bfbc;
+  z-index:1;
+}
+#volume div{
+  background-color:#a52125;
+  height:2px;
+  width:100%;
+  display:block;
+}
+#volume span{
+  background:url('../images/round_1.png');
+  background-size:10px 10px;
+  width:10px;
+  height:10px;
+  display:block;
+  position:relative;
+  top: -.4em;
+  margin-left: -.6em;
+  outline:none;
+}
+
+#volume span.ui-state-hover{
+  background:url('../images/round_2.png') no-repeat;
+  background-size:20px 20px;
+  width:20px;
+  height:20px;
+  display:block;
+  position:relative;
+  top: -.6em;
+  margin-left: -.7em;
+  outline:none;
+  transition:all 0.4s ease;
+}
+
+#sound_icon{
+  cursor:pointer;
+}
+#sound_icon span{
+  width:32px;
+  height:28px;
+  display:block;
+  background-image:url('../images/tune_2.png');
+  background-repeat:no-repeat;
+  background-size:29px 28px;
+  background-position:center center;
+  transition:all 0.4s ease;
+}
+
+#sound_icon span.tune2{
+  background-image:url('../images/tune_1.png');
+  background-size:25px 28px;
+  transition:all 0.4s ease;
+}
+
+#sound_icon span.tune3{
+  background-image:url('../images/tune_3.png');
+  background-size:32px 28px;
+  transition:all 0.4s ease;
+}
+
+#sound_icon span.mute{
+  background-image:url('../images/mute.png');
+  background-size:25px 28px;
+  transition:all 0.4s ease;
+}

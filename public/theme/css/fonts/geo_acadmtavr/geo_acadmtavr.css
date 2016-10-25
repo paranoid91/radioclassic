@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'GeoAcadMtavrRegular';
+    src: url('geo_acadmtavr.eot');
+    src: url('geo_acadmtavr.eot') format('embedded-opentype'),
+         url('geo_acadmtavr.woff2') format('woff2'),
+         url('geo_acadmtavr.woff') format('woff'),
+         url('geo_acadmtavr.ttf') format('truetype'),
+         url('geo_acadmtavr.svg#GeoAcadMtavrRegular') format('svg');
+}

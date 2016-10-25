@@ -1,0 +1,24 @@
+<!-- Template Name: Home Page -->
+
+
+<?php $__env->startSection("script"); ?>
+  <?php /*  <script src="http://cdn.imnjb.me/libs/instafeed.js/1.3.2/instafeed.min.js"></script>
+    <script type="text/javascript">
+        var feed = new Instafeed({
+            get: 'user',
+            userId: '1776836807',
+            clientId: '7321411abf3a4958b207ae2779422578',
+            accessToken: '1776836807.7321411.06ce7ad98c1548ffb09b8fb75ff6696a',
+            limit: 6
+        });
+        feed.run();
+    </script>*/ ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('theme.pages.main.news', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+   <?php /* <?php echo $__env->make('theme.pages.main.events', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?>
+    <?php /*<?php echo $__env->make('theme.pages.main.video', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?>
+    <?php /*<?php echo $__env->make('theme.pages.main.image', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

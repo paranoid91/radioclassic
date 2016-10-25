@@ -1,0 +1,149 @@
+.ui-state-default{
+    cursor:move;
+}
+.modal-body > div{
+    margin-top:5px;
+}
+
+.top0{
+    margin-top:0;
+    top:0;
+}
+.billing-info{
+    background-color:#FFF;
+    margin:25px 0 0 20px;
+    border:1px solid #e7e7e7;
+    word-wrap: break-word;
+
+}
+.billing-info .last span{
+    font-size:12px;
+}
+.billing-info .row{
+    padding:10px 20px;
+}
+.nav_bars{
+    position:relative;
+    display:block;
+    width:100%;
+    padding:0 10px;
+    cursor:pointer;
+    top:20px;
+    text-align:right;
+}
+.nav_bars i{
+    font-size:40px;
+    color:#ffa200;
+}
+
+.required{
+    color:#e30c0c;
+}
+
+.ajax_drop{
+    position:absolute;
+    z-index:1;
+    background-color:#FFF;
+    width:195px;
+    border:1px solid #e7e7e7;
+    display:none;
+}
+.ajax_drop ul{
+    margin:0;
+    padding:10px;
+    list-style:none
+}
+.ajax_drop ul li{
+    cursor:pointer;
+    padding:5px;
+}
+.ajax_drop ul li:hover{
+    background-color:#ccc;
+}
+
+.ul-filter{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+#rubrics label{
+    margin:0 20px 0 20px;
+    padding:0;
+    max-width:150px;
+}
+
+.image_gallery {
+    margin:0;
+    padding:0;
+    list-style:none;
+    max-width:600px;
+    display:block;
+}
+
+.image_gallery li{
+    position:relative;
+    float:left;
+    max-height:120px;
+    overflow:hidden;
+}
+.image_gallery li img{
+    max-width:200px;
+    width:100%;
+    overflow:hidden;
+}
+
+.image_gallery li:first-child{
+    min-height:360px;
+}
+.image_gallery li:nth-child(1){
+    min-height:360px;
+}
+
+.image_gallery li:first-child img{
+    max-width:600px;
+    width:600px;
+    height:auto;
+}
+.image_gallery li b{
+    position:absolute;
+}
+
+.competition table tr td{
+    padding:5px 0 5px 0;
+}
+
+
+.competition table tr td table{
+    border:1px solid #e7e7e7;
+}
+
+.competition table tr td  table th{
+    border-bottom:1px solid #e7e7e7;
+    padding:5px 10px;
+}
+.competition table tr td table tfoot td{
+    border-top:1px solid #e7e7e7;
+}
+.competition table tr td table td{
+    text-align:center;
+    padding:5px;
+}
+
+/*
+    navbar-pos-center
+*/
+
+.navbar-pos-center{
+    position: absolute;
+    left:46%;
+    height:100%;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-pos-center{
+        left:4%;
+    }
+
+}

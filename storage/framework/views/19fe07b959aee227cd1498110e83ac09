@@ -1,0 +1,95 @@
+<?php $__env->startSection('content'); ?>
+    <div class="records">
+        <?php if(count($items) > 0): ?>
+         <?php $y = youtube(get_youtube_array($items)); $i=0; ?>
+        <div class="records-list">
+            <?php if(count($items[0]->categories) > 0): ?>
+                <?php if(!empty($items[0]->categories[0]->name)): ?>
+                <div class="records-title">
+                    <a href="javascript:void('')"><?php echo ($items[0]->categories[0]->name == 'free_event' or $items[0]->categories[0]->name == 'premium_event') ? trans('all.f_events') : trans('all.f_'.$items[0]->categories[0]->name); ?></a>
+                </div>
+                <?php endif; ?>
+            <?php endif; ?>
+            <div class="records-content">
+                <ul>
+                    <?php foreach($items as $yt): ?>
+                        <li class="item-list">
+                        <?php if($items[0]->categories[0]->name == "youtube" || (isset($youtube_video) and $youtube_video == true) ): ?>
+                        <div class="item-img">
+
+                        </div>
+                        <div>
+                            <div class="data-wrap">
+                                <?php if(in_array(77,array_pluck($yt->categories,'id'))): ?>
+                                    <?php echo youtubeVideo($yt,true); ?>
+
+                                <?php else: ?>
+                                    <?php if(strpos($yt->body,"[video:") === false && !empty($yt->body)): ?>
+                                        <?php if(youtubeVideo($yt,false) <> ""): ?>
+                                            <?php echo youtubeVideo($yt,false); ?>
+
+                                            <?php echo do_shortcode($yt->body); ?>
+
+                                        <?php else: ?>
+                                            <?php if(count($images) > 0): ?><div class="main-img"><img class="img-responsive" src="<?php echo get_img_url($images[0]->img); ?>" /></div> <?php endif; ?>
+                                            <?php echo do_shortcode($yt->body); ?>
+
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php else: ?>
+                                <?php if(get_youtube($yt->body)): ?>
+                                    <?php echo get_youtube($yt->body); ?>
+
+                                <?php else: ?>
+                                    <a href="<?php echo e(url('/'.$yt->categories[0]->slug.'/'.((!empty($yt->slug)) ? $yt->slug : $yt->id))); ?>" onClick="return ajaxRoute($(this).attr('href'))">
+                                        <div class="item-details">
+                                            <div class="item-title">
+                                                <?php echo e(check_value($yt->frontpage_title,$yt->title)); ?>
+
+                                            </div>
+                                            <div class="item-desc">
+                                                <?php echo e(check_value($yt->head,str_limit(preg_replace('#\<(.*?)\>#','', strip_tags($yt->body)), $limit = 150, $end = '...' ))); ?>
+
+                                            </div>
+                                        </div>
+                                        <div class="item-img">
+                                            <?php /*<img src="<?php echo e((!empty($item->img)) ? get_img_url($item->img) : asset('theme/images/no_photo.png')); ?>" />*/ ?>
+                                            <img src="<?php echo e((!empty($yt->img)) ? get_img_url($yt->img) : asset('theme/images/no_photo.png')); ?>" height="250px"/>
+                                        </div>
+                                    </a>
+                                <?php endif; ?>
+                        <?php endif; ?>
+                    </li>
+                    <?php /**/$i++/**/ ?>
+                    <?php endforeach; ?>
+                    <!-- END NEWS 1 -->
+                </ul>
+                <div class="fix"></div>
+                <div id="preloader"></div>
+            </div>
+                <div class="fix"></div>
+            <div class="item-show-more">
+                <?php if($items[0]->categories[0]->name == "youtube"): ?>
+                    <a onClick="loadRecords(this)" data-preloader="<?php echo e(asset('theme/images/loading.GIF')); ?>" data-cat="<?php echo e('youtube'); ?>"
+                       data-num="10" data-token="<?php echo e(csrf_token()); ?>" data-url="<?php echo e(action('WelcomeController@loadRecords')); ?>"><?php echo e(trans('all.show_more')); ?>
+
+                    </a>
+                <?php else: ?>
+                <a onClick="loadRecords(this)" data-preloader="<?php echo e(asset('theme/images/loading.GIF')); ?>" data-cat="<?php echo e(($items[0]->categories[0]->name == 'free_event' or
+                        $items[0]->categories[0]->name == 'premium_event' ) ? 'events' : $items[0]->categories[0]->name); ?>"
+                        data-num="10" data-token="<?php echo e(csrf_token()); ?>" data-url="<?php echo e(action('WelcomeController@loadRecords')); ?>"><?php echo e(trans('all.show_more')); ?>
+
+                </a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php else: ?>
+            no data.
+        <?php endif; ?>
+    </div>
+    <div class="fix"></div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('theme.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

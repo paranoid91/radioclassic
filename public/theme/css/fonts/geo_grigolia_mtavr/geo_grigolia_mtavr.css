@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'GeoGrigoliaMtavrRegular';
+    src: url('geo_grigolia_mtavr.eot');
+    src: url('geo_grigolia_mtavr.eot') format('embedded-opentype'),
+         url('geo_grigolia_mtavr.woff2') format('woff2'),
+         url('geo_grigolia_mtavr.woff') format('woff'),
+         url('geo_grigolia_mtavr.ttf') format('truetype'),
+         url('geo_grigolia_mtavr.svg#GeoGrigoliaMtavrRegular') format('svg');
+}

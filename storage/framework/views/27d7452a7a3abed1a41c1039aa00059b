@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Panel</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
+    <link href="<?php echo e(asset('/css/app.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('/css/admin/styles.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('/css/admin/custom.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('/css/admin/menu/jquery.domenu-0.48.53.css')); ?>" rel="stylesheet">
+    <!-- Fonts -->
+    <!--<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="<?php echo e(asset('/css/font-awesome/font-awesome.min.css')); ?>">
+
+    <link href="<?php echo e(asset('/css/bootstrap-datetimepicker.css')); ?>" rel="stylesheet">
+
+    <link href="<?php echo e(asset('/css/jquery.fancybox-1.3.4.css')); ?>" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="<?php echo e(asset('/js/jquery/jquery-1.11.3.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('/js/jquery/jquery-migrate-1.2.1.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('/js/jquery/ui/jquery-ui.js')); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo e(asset('/js/bootstrap/bootstrap.min.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('/js/bootstrap/moment-with-locales.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('/js/bootstrap/bootstrap-datetimepicker.js')); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo e(asset('/js/jquery/jquery.fancybox-1.3.4.js')); ?>"></script>
+    <script>
+        $(document).ready(function () {
+            $('.iframe-btn').fancybox({
+                'width'		: 900,
+                'height'	: 600,
+                'type'		: 'iframe',
+                'autoScale'    	: false
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript" src="<?php echo e(asset('js/tinymce/tinymce.min.js')); ?>"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea.tinymce",theme: "modern",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "Convert emoticons template paste textcolor colorpicker textpattern"
+            ],
+            toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+            toolbar2: "Convert | link unlink anchor | image media imgal | boldcolor forecolor backcolor  | print preview code | fontselect fontsizeselect",
+            image_advtab: true ,
+            filemanager_access_key:"baa950b9ec364447b677a1fa7cda724b" ,
+            external_filemanager_path:"<?php echo e(asset('filemanager')); ?>/",
+            filemanager_title:"Filemanager" ,
+            external_plugins: { "filemanager" : "<?php echo e(asset('/filemanager/plugin.min.js')); ?>", "Convert" : "<?php echo e(asset('/js/convert/plugin.min.js')); ?>"}
+        });
+    </script>
+
+</head>
+<body class="<?php echo e((strpos(Route::getCurrentRoute()->uri(),'auth')) ? 'body-img' : ''); ?>">
+<?php echo $__env->make('nav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<div class="container">
+
+   <div class="<?php echo e((isset($_COOKIE['nav_bar']) != false) ? 'topSide' : 'leftSide'); ?> "><!--class="leftSide"-->
+        <?php if(!Auth::guest()): ?>
+            <?php echo $__env->make('admin.block', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php endif; ?>
+   </div>
+   <div class="<?php echo e((strpos(Route::getCurrentRoute()->uri(),'auth')) ? 'centerSide' : ((isset($_COOKIE['nav_bar']) != false) ? 'middleSide':'rightSide')); ?>">
+       <div id="alert-messages"><?php echo $__env->make('flash::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></div>
+       <div class="content">
+           <?php echo $__env->yieldContent('content'); ?>
+       </div>
+
+    </div>
+</div>
+
+<script src="<?php echo e(asset('/js/custom.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/ajax.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/menu/jquery.domenu-0.48.53.js')); ?>"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm'
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm'
+        });
+        $('#datetimepicker3').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm'
+        });
+    });
+</script>
+
+
+</body>
+</html>

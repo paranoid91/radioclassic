@@ -1,0 +1,26 @@
+<div class="block-list" >
+    <?php $modules = get_modules() ?>
+    <?php if(count($modules) > 0): ?>
+        <ul>
+            <?php foreach($modules as $mod): ?>
+
+                <?php if($mod->name <> 'modules'): ?>
+                    <?php if(is_array(get_role_permissions($mod->name))): ?>
+                        <?php $array = (in_array('index',get_role_permissions($mod->name))) ? true : false ?>
+                    <?php else: ?>
+                        <?php $array = false ?>
+                    <?php endif; ?>
+                    <?php if($array == true): ?>
+                        <li class="<?php echo e((strpos(Route::getCurrentRoute()->uri(),$mod->name)) ? 'active ' : ''); ?><?php echo e($mod->name); ?>"><a href="<?php echo e(action($mod->controller)); ?>" title="<?php echo e(trans('admin.'.$mod->name)); ?>"><i class="<?php echo e($mod->icon); ?>"></i> <span><?php echo e(trans('admin.'.$mod->name)); ?></span></a></li>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <li class="<?php echo e((strpos(Route::getCurrentRoute()->uri(),'modules')) ? 'active' : ''); ?> modules"><a href="<?php echo e(action('Admin\ModulesController@index')); ?>" title="<?php echo e(trans('admin.modules')); ?>"><i class="glyphicon glyphicon-th"></i> <span><?php echo e(trans('admin.modules')); ?></span></a></li>
+        </ul>
+    <?php endif; ?>
+    <div class="fix"></div>
+    <div class="nav_bars">
+        <i onClick='$("input[name=\"active_top_slide\"]").click()' class="glyphicon <?php echo e((isset($_COOKIE['nav_bar']) != false) ? 'glyphicon-arrow-up' : 'glyphicon-arrow-left'); ?>"></i>
+        <input type="checkbox" value="1" name="active_top_slide" style="display:none;" <?php echo e((isset($_COOKIE['nav_bar']) != false) ? 'checked' : ''); ?>>
+    </div>
+</div>

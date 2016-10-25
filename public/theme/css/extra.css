@@ -1,0 +1,38 @@
+.records-content ul li .item-img .item-bg{
+    background: rgba(70,72,74,.3) !important;
+}
+
+.item-details{
+    position:absolute;
+    z-index:1;
+    bottom:0;
+    background:rgba(70,72,74,.9) !important
+}
+
+.item-details .item-desc{
+    display:none;
+    padding:0 10px 10px 10px;
+}
+
+.item-details .item-title{
+    font-size:18px;
+    padding:10px 10px 10px 10px;;
+}
+
+.records-content ul li:hover .item-details .item-title{
+    text-decoration:underline;
+}
+
+.item-list .data-wrap{
+    position:absolute;
+    top:0;
+}
+
+.radio-playlist .radio-playlist-item ul li > div{
+    max-width:630px;
+}
+
+.read_content img{
+    max-width:100%;
+    height:auto;
+}

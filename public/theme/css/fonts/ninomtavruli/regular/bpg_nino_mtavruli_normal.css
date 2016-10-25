@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'BPGNinoMtavruliRegular';
+    src: url('bpg_nino_mtavruli_normal.eot');
+    src: url('bpg_nino_mtavruli_normal.eot') format('embedded-opentype'),
+         url('bpg_nino_mtavruli_normal.woff2') format('woff2'),
+         url('bpg_nino_mtavruli_normal.woff') format('woff'),
+         url('bpg_nino_mtavruli_normal.ttf') format('truetype'),
+         url('bpg_nino_mtavruli_normal.svg#BPGNinoMtavruliRegular') format('svg');
+}

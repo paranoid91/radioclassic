@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'BPGPaataCapsRegular';
+    src: url('bpg_paata_caps.eot');
+    src: url('bpg_paata_caps.eot') format('embedded-opentype'),
+         url('bpg_paata_caps.woff2') format('woff2'),
+         url('bpg_paata_caps.woff') format('woff'),
+         url('bpg_paata_caps.ttf') format('truetype'),
+         url('bpg_paata_caps.svg#BPGPaataCapsRegular') format('svg');
+}

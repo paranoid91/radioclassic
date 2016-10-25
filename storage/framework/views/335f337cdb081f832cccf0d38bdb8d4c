@@ -1,0 +1,44 @@
+<?php if(Auth::guest() ||  Auth::user()->hasRole('User')): ?>
+
+<?php else: ?>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-pos-center" href="javascript:void(0)" target="_blank"><img src="<?php echo e(url('/')); ?>/uploads/img/logo.png" height="20"></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="<?php echo e(url('/')); ?>" target="_blank"><?php echo e(trans('all.visit_website')); ?></a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="<?php echo e(url('/is-admin/home')); ?>"><?php echo e(trans('all.administration')); ?></a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <?php echo Form::open(['method'=>'post','action'=>'LanguageController@cookie','name'=>'languages']); ?>
+
+                        <?php echo Form::select('locale', get_languages(),App::getLocale(),['onchange'=>'document.languages.submit()','class'=>'form-control']); ?>
+
+                        <?php echo Form::close(); ?>
+
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo e(Auth::user()->name); ?> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo e(action('Auth\AuthController@getLogout')); ?>"><?php echo e(trans('all.logout')); ?></a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+<?php endif; ?>

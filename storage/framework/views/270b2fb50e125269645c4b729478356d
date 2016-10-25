@@ -1,0 +1,307 @@
+<?php /**/ $parents = get_cat_by_parent(2) /**/ ?>
+
+<?php echo Form::hidden('type',$type); ?>
+
+<div class="row">
+    <div class="col-xs-5">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <?php echo Form::label('lang',trans('all.chose_language')); ?>
+
+                    <?php echo Form::select('lang',get_languages(),$lang,['class'=>'form-control','style'=>'margin-top:0']); ?>
+
+                </div>
+            </div>
+        </div>
+        <?php if(count($parents) > 0): ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <?php echo Form::label('cat',trans('all.main_category')); ?><i class="required">*</i>
+                        <select id="main_cat" name="cat[]" class="form-control" style="margin-top:0;">
+                            <option value="">---</option>
+
+                            <?php foreach($parents as $p): ?>
+                                <option value="<?php echo e($p['id']); ?>" <?php echo e(($p['id'] == $parent || $p['id'] == $catid) ? 'selected' : ((($parent <= 0 and $catid <=0) && $p['id'] == 55) ? 'selected' : '')); ?> data-checked="<?php echo e($checked_cats); ?>" data-news="<?php echo e($news_id); ?>" data-route="<?php echo e(action('Admin\ArticlesController@getCats')); ?>" data-url="<?php echo e(action('Admin\ArticlesController@getFields')); ?>" data-token="<?php echo e(csrf_token()); ?>" data-extra="<?php echo e($json_extra); ?>"><?php echo e(trans('all.'.$p['name'])); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <?php echo Form::label('published_at',trans('all.published_at')); ?><i class="required">*</i>
+                    <?php echo Form::text('published_at',$date,['class'=>'form-control','id'=>'datetimepicker1']); ?>
+
+                </div>
+            </div>
+            <?php echo $__env->make('admin.articles.extra_fields.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        </div>
+
+        <div class="row" <?php if(Auth::user()->hasRole('author')): ?> style="display:none" <?php endif; ?>>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <?php echo Form::label('author',trans('all.author')); ?>
+
+                    <?php echo Form::text('author',$chose_author,['class'=>'form-control ajax_author','data-route'=>action('Admin\UsersController@getAjaxUserName'),'data-token'=>csrf_token()]); ?>
+
+                    <div class="ajax_author_get ajax_drop"></div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <?php echo Form::label('author',trans('all.chose_author')); ?>
+
+                    <?php echo Form::selectMy('chose-author',$users,$chose_author,'<option>---</option>',['class'=>'form-control','onChange'=>'selectInput(this,"author")','style'=>'margin-top:0px;']); ?>
+
+                </div>
+            </div>
+        </div>
+        <div class="row image_buttons">
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <span>
+                    <a class="btn btn-warning">1</a>
+                    <a class="btn btn-success iframe-btn" href="<?php echo e(asset('/filemanager/dialog.php?type=1&descending=false&akey=baa950b9ec364447b677a1fa7cda724b&field_id=UploadImage0')); ?>"><i class="fa fa-image"></i> <?php echo e(trans('all.chose_img')); ?></a>
+                    <a class="btn btn-danger" data-id="0" onClick="removeImage(this)"><i class="fa fa-trash-o"></i> <?php echo e(trans('all.remove')); ?></a>
+                    <a class="image_details btn btn-info" data-toggle="modal" data-target="#ImageEditModal0" ><i class="fa fa-edit"></i> <?php echo e(trans('all.edit')); ?></a>
+                    </span>
+                    <a class="btn btn-primary add_photo" data-url="<?php echo e(action('Admin\ImagesController@imgField')); ?>" data-token="<?php echo e(csrf_token()); ?>"><i class="fa fa-plus-square-o"></i> <?php echo e(trans('all.add_more')); ?></a>
+                </div>
+
+            </div>
+
+            <?php if(count($image_gallery) > 1): ?>
+                <?php /**/$i = 0/**/ ?><?php foreach($image_gallery as $image): ?>
+                    <?php if(!empty($image['img'])): ?>
+                        <?php if($i <> 0): ?>
+                        <div class="col-sm-11">
+                            <div class="form-group">
+                              <span>
+                                <a class="btn btn-warning"><?php echo e($i + 1); ?></a>
+                                <a class="btn btn-success iframe-btn" href="<?php echo e(asset('/filemanager/dialog.php?type=1&descending=false&akey=baa950b9ec364447b677a1fa7cda724b&field_id=UploadImage'.$i)); ?>"><i class="fa fa-image"></i> <?php echo e(trans('all.chose_img')); ?></a>
+                                <a class="btn btn-danger" data-id="<?php echo e($i); ?>" onClick="removeImageMore(this)"><i class="fa fa-trash-o"></i> <?php echo e(trans('all.remove')); ?></a>
+                                <a class="image_details btn btn-info" data-toggle="modal" data-target="#ImageEditModal<?php echo e($i); ?>" ><i class="fa fa-edit"></i> <?php echo e(trans('all.edit')); ?></a>
+                              </span>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                            <?php /**/ $i++ /**/ ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <ul class="image_gallery">
+            <li>
+                <span class="UploadImage0" data-id="1"  data-toggle="modal" data-target="#ImageEditModal0">
+                    <?php if(!empty($image_gallery[0]['img'])): ?>
+                      <b class="btn btn-warning">1</b>
+                      <img src="<?php echo e(get_img_url($image_gallery[0]['img'])); ?>">
+                    <?php endif; ?>
+                </span>
+                <?php echo $__env->make('admin.modals.image',['modal_id'=>'ImageEditModal','num'=>0], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            </li>
+            <div class="fix"></div>
+
+            <?php if(count($image_gallery) > 1): ?>
+                <?php /**/$i = 0/**/ ?><?php foreach($image_gallery as $image): ?>
+                    <?php if(!empty($image['img'])): ?>
+                       <?php if($i <> 0): ?>
+                        <li>
+                           <span class="UploadImage<?php echo e($i); ?>" data-id="<?php echo e($i + 1); ?>" data-toggle="modal" data-target="#ImageEditModal<?php echo e($i); ?>">
+                             <b class="btn btn-warning"><?php echo e($i + 1); ?></b>
+                             <img src="<?php echo e(get_img_url($image['img'])); ?>" >
+                           </span>
+                            <?php echo $__env->make('admin.modals.image',['modal_id'=>'ImageEditModal'.$i,'num'=>$i], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        </li>
+                        <?php endif; ?>
+                        <?php /**/ $i++ /**/ ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>
+<!--
+<div class="row">
+ <div class="col-sm-10">
+     <div class="form-group">
+         <?php echo Form::label('extra_fields[brightcove]',trans('all.brightcove'),['style'=>'float:left;']); ?><div class="fix"></div>
+         <?php echo Form::text('extra_fields[brightcove]',$brightcove,['class'=>'form-control video_type','id'=>'brightcove','style'=>'width:30%;float:left;']); ?>
+
+         <a class="btn btn-success iframe-btn" href="http://new.gbtimes.ge/brightcove/videos" style="margin-left:5px;">Browse</a>
+     </div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="col-sm-12">
+     <div class="form-group">
+
+         <?php echo Form::label('extra_fields[embed_video]',trans('all.embed')); ?>
+
+         <?php echo Form::textarea('extra_fields[embed_video]',$embed,['class'=>'form-control video_type','id'=>'embed','style'=>'width:100%;','rows'=>'5','cols'=>'60']); ?>
+
+    </div>
+    </div>
+</div>-->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?php echo Form::label('title',trans('all.title')); ?><i class="required">*</i>
+            <?php echo Form::text('title',null,['class'=>'form-control count_field','maxlength'=>'255']); ?>
+
+            <small>Content limited to 255 characters, remaining: <span class="title_count">0</span></small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?php echo Form::label('frontpage_title',trans('all.frontpage_title')); ?>
+
+            <?php echo Form::text('frontpage_title',null,['class'=>'form-control count_field','maxlength'=>'55']); ?>
+
+            <small>Content limited to 55 characters, remaining: <span class="frontpage_title_count">0</span></small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?php echo Form::label('social_media_title',trans('all.social_media_title')); ?>
+
+            <?php echo Form::text('social_media_title',null,['class'=>'form-control count_field','maxlength'=>'100']); ?>
+
+            <small>Content limited to 100 characters, remaining: <span class="social_media_title_count">0</span></small>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?php echo Form::label('head',trans('all.short_desc')); ?>
+
+            <?php echo Form::textarea('head',null,['class'=>'form-control','rows'=>5]); ?>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?php echo Form::label('body',trans('all.text')); ?><i class="required">*</i>
+            <?php echo Form::textarea('body',null,['class'=>'form-control tinymce']); ?>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-xs-6">
+        <?php echo $fields; ?>
+
+        <div id="extra_parent_fields"></div>
+        <div id="extra_child_fields"></div>
+        <div id="preloader"></div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <?php echo Form::label('meta_key',trans('all.tags')); ?>
+
+                    <?php echo Form::text('meta_key',null,['class'=>'form-control count_field ajax_tags','maxlength'=>100,'data-route'=>action('Admin\ArticlesController@getAjaxTags'),'data-token'=>csrf_token()]); ?>
+
+                    <small>Content limited to 100 characters, remaining: <span class="meta_key_count">0</span></small>
+                    <div class="ajax_tags_get ajax_drop"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <?php echo Form::label('meta_desc',trans('all.meta_desc')); ?>
+
+                    <?php echo Form::textarea('meta_desc',null,['class'=>'form-control','maxlength'=>150,'rows'=>5]); ?>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label class="checkbox-inline" >
+                        <?php echo Form::hidden('menu_builder',0); ?>
+
+                        <?php echo Form::checkbox('menu_builder',1); ?>
+
+                        <?php echo e(trans('all.show_in_menu_builder')); ?>
+
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <?php echo Form::label('slug',trans('all.url').' ('.trans('all.auto_gen').')'); ?>
+
+                    <?php echo Form::text('slug',null,['class'=>'form-control','maxlength'=>255]); ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="competition" style="display:none;">
+        <div class="col-xs-6">
+            <div class="row box">
+                <h3><?php echo e(trans('all.competition')); ?></h3>
+
+                <div class="col-sm-12">
+                    <div class="form-group" id="competition">
+                      <?php echo $__env->make('admin.articles.extra_fields.competition', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rubrics"  style="display:none;">
+        <div class="col-xs-6">
+            <div class="row box">
+                <h3><?php echo e(trans('all.categories')); ?></h3>
+
+                <div class="col-sm-12">
+                    <div class="form-group" id="rubrics">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <?php /*<?php echo Form::submit($submitButtonText,['class' => 'btn btn-primary']); ?>*/ ?>
+            <?php echo Form::submit( trans('all.save-bt') ,['class' => 'btn btn-primary']); ?>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    $('.title_count').text($('input[name="title"]').val().length);
+    $('.frontpage_title_count').text($('input[name="frontpage_title"]').val().length);
+    $('.social_media_title_count').text($('input[name="social_media_title"]').val().length);
+    $('.meta_key_count').text($('input[name="meta_key"]').val().length);
+</script>

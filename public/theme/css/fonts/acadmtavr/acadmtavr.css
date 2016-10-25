@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'AcadMtavrRegular';
+    src: url('acadmtavr.eot');
+    src: url('acadmtavr.eot') format('embedded-opentype'),
+         url('acadmtavr.woff2') format('woff2'),
+         url('acadmtavr.woff') format('woff'),
+         url('acadmtavr.ttf') format('truetype'),
+         url('acadmtavr.svg#AcadMtavrRegular') format('svg');
+}

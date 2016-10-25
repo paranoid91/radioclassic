@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'BPGIngiri2008Regular';
+    src: url('bpg_ingiri_2008.eot');
+    src: url('bpg_ingiri_2008.eot') format('embedded-opentype'),
+         url('bpg_ingiri_2008.woff2') format('woff2'),
+         url('bpg_ingiri_2008.woff') format('woff'),
+         url('bpg_ingiri_2008.ttf') format('truetype'),
+         url('bpg_ingiri_2008.svg#BPGIngiri2008Regular') format('svg');
+}
